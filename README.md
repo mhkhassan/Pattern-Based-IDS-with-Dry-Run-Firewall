@@ -44,4 +44,35 @@ If you don’t have a requirements.txt yet, a minimal one:
 - Optional system setup
   - Linux: ensure libpcap is installed (usually already present).
   - macOS: you may need to grant terminal full disk/network capture permissions.
+ 
+## Configuration
+Edit config.ini to control behavior.
+
+Example (matches your current config):
+[Detection]
+WebsitePatterns = reddit.com,amazon.com,psl-t20.com,instagram.com
+
+[Firewall]
+Enabled = true
+
+[Logging]
+LogFile = network_activity.log
+AlertLogFile = alert_generated.log
+LogLevel = INFO
+LogFormat = %(asctime)s - %(message)s
+LogDateFormat = %Y-%m-%d %H:%M:%S
+
+### Notes
+- Patterns are treated as regular expressions. If you intend to match domains exactly, escape dots and consider word boundaries (e.g., reddit.com).
+- The current code compiles patterns without re.IGNORECASE. Add case-insensitive flag in code if desired.
+- Firewall Enabled = true only logs a “Blocking IP” message; it does not enforce rules unless you extend the code.
+
+## Running
+Option A: Jupyter Notebook (recommended for exploration)
+1. Start Jupyter
+  - pip install notebook # if needed
+  - jupyter notebook
+2. Open Assignment1.ipynb and run all cells
+  - You will see “Starting the IDS with Firewall...” in the output.
+  - Alerts will print to stdout and append to alert_generated.log.
 
