@@ -29,3 +29,8 @@ This project is intended for learning and demos, not for production security.
 - Libraries:
   - scapy
   - (optional) iptables/nftables if you later implement real blocking
+
+## Installation
+- Clone the repository
+  - git clone https://github.com/your-username/pattern-ids.git
+  - cd pattern-ids
