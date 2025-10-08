@@ -56,11 +56,11 @@ WebsitePatterns = reddit.com,amazon.com,psl-t20.com,instagram.com
 Enabled = true
 
 [Logging]
-LogFile = network_activity.log
-AlertLogFile = alert_generated.log
-LogLevel = INFO
-LogFormat = %(asctime)s - %(message)s
-LogDateFormat = %Y-%m-%d %H:%M:%S
+LogFile = network_activity.log  
+AlertLogFile = alert_generated.log  
+LogLevel = INFO  
+LogFormat = %(asctime)s - %(message)s  
+LogDateFormat = %Y-%m-%d %H:%M:%S  
 
 ### Notes
 - Patterns are treated as regular expressions. If you intend to match domains exactly, escape dots and consider word boundaries (e.g., reddit.com).
@@ -69,10 +69,56 @@ LogDateFormat = %Y-%m-%d %H:%M:%S
 
 ## Running
 Option A: Jupyter Notebook (recommended for exploration)
-1. Start Jupyter
-  - pip install notebook # if needed
-  - jupyter notebook
-2. Open Assignment1.ipynb and run all cells
-  - You will see “Starting the IDS with Firewall...” in the output.
-  - Alerts will print to stdout and append to alert_generated.log.
+  1. Start Jupyter  
+    - pip install notebook # if needed  
+    - jupyter notebook  
+  2. Open Assignment1.ipynb and run all cells  
+    - You will see “Starting the IDS with Firewall...” in the output.  
+    - Alerts will print to stdout and append to alert_generated.log.  
+  3. Stop Sniffing  
+    - Press Kernel -> Interrupt, or Ctrl+C in the terminal where the notebook is running.
+      
+Option B: Convert to a Python script (optional)
+  - You can export or refactor the notebook’s Matcher class into a .py script for CLI use.
+  - Then run: sudo python ids.py
+  - Consider adding arguments for interface and BPF filter.
 
+Permissions
+  - On Unix systems, you’ll likely need sudo/root to capture packets:
+  - sudo open jupyter notebook
+  - or run the kernel with elevated privileges (be careful).
+
+## Logs and Outputs
+- network_activity.log: general activity from logging (packet summaries).
+- alert_generated.log: alert messages when patterns match.
+- Console: prints alerts in real time.
+
+Tip: Add .gitignore entries to avoid committing logs:
+- pycache/
+- .venv/
+- *.log
+
+## Common tweaks and extensions
+- Case-insensitive patterns:
+  - Modify code to compile regex with re.IGNORECASE.
+- Safer firewall:
+  - Keep Enabled=false by default; if enabling real blocking, clearly document the iptables/nftables commands and risks.
+- Filtering scope:
+  - Limit capture to relevant ports, e.g., sniff(filter="tcp port 80 or 443").
+- Structured logging:
+  - Add a JSON alert log including src/dst IPs and ports.
+- Dedup/rate limiting:
+  - Cache alerts and aggregate duplicates to reduce noise.
+- Offline testing:
+  - Add a sample .pcap and process with scapy.rdpcap to test without live capture.
+ 
+## Troubleshooting
+- Permission denied or no packets captured:
+  - Run with sudo/admin or specify a network interface.
+- No alerts:
+  - Verify patterns in config.ini and that traffic actually contains those strings.
+- Too many alerts:
+  - Tighten patterns (use proper regex boundaries) and add dedup logic.
+ 
+## Disclaimer
+This software is provided “as is” without warranty. Use at your own risk. The authors are not responsible for misuse or damages.
