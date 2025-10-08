@@ -34,3 +34,14 @@ This project is intended for learning and demos, not for production security.
 - Clone the repository
   - git clone https://github.com/your-username/pattern-ids.git
   - cd pattern-ids
+- Create and activate a virtual environment
+  - python3 -m venv .venv
+  - source .venv/bin/activate # Windows: .venv\Scripts\activate
+- Install dependencies
+  - pip install -r requirements.txt
+If you don’t have a requirements.txt yet, a minimal one:
+  - scapy
+- Optional system setup
+  - Linux: ensure libpcap is installed (usually already present).
+  - macOS: you may need to grant terminal full disk/network capture permissions.
+
