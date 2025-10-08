@@ -21,3 +21,11 @@ This project is intended for learning and demos, not for production security.
 - alert_generated.log — appended alert messages (human-readable).
 - network_activity.log — activity log (created by the program).
 - requirements.txt — Python dependencies (recommended to add).
+
+## Requirements
+- OS: Linux or macOS recommended. Windows may require additional setup for libpcap/WinPcap/Npcap.
+- Python: 3.9+ (project tested with 3.9).
+- Privileges: root/admin typically required to sniff interfaces.
+- Libraries:
+  - scapy
+  - (optional) iptables/nftables if you later implement real blocking
