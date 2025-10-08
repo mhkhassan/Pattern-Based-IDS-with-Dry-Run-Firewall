@@ -9,3 +9,8 @@ This project is intended for learning and demos, not for production security.
 - Human-readable activity and alert logs.
 - Pluggable “firewall” action (disabled by default; implemented as logging/dry-run).
 - Jupyter notebook for interactive exploration.
+
+## Legal and Ethical Notice
+- Only sniff traffic on networks you own or have explicit permission to monitor.
+- Packet capture often requires administrative/root privileges.
+- Misuse can be illegal and unethical. This project is for educational purposes only, with no warranty.
